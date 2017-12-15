@@ -1,0 +1,21 @@
+FROM ubuntu:16.04
+
+MAINTAINER Jakub Bednar <https://github.com/bednar>
+
+# this is a non-interactive automated build - avoid some warning messages
+ENV DEBIAN_FRONTEND noninteractive
+
+# update dpkg repositories
+RUN apt-get update --fix-missing
+
+# install wget
+RUN apt-get install -y wget
+
+# Recipes
+
+${recipes}
+
+# remove download archive files
+RUN apt-get clean
+
+EXPOSE 6379

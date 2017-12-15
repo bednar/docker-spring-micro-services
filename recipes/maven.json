@@ -1,0 +1,17 @@
+{
+  "name": "Apache Maven",
+  "version": "3.5.2",
+  "description" : "Thx https://github.com/kaiwinter/docker-java8-maven/blob/master/Dockerfile",
+  "cmd": [
+    "# download",
+    "RUN wget -O /tmp/apache-maven-3.5.2.tar.gz http://mirror.dkm.cz/apache/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz",
+    "# verify checksum",
+    "RUN echo \"948110de4aab290033c23bf4894f7d9a /tmp/apache-maven-3.5.2.tar.gz\" | md5sum -c",
+    "# install maven",
+    "RUN tar xzf /tmp/apache-maven-3.5.2.tar.gz -C /opt/",
+    "RUN ln -s /opt/apache-maven-3.5.2 /opt/maven",
+    "RUN ln -s /opt/maven/bin/mvn /usr/local/bin",
+    "RUN rm -f /tmp/apache-maven-3.5.2.tar.gz",
+    "ENV MAVEN_HOME /opt/maven"
+  ]
+}
