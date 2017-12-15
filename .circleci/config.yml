@@ -1,13 +1,12 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: debian:stretch
+    machine: true
     steps:
       - checkout
       - run:
-          name: Greeting
+          name: Build the Dockerfile
           command: echo Hello, world.
       - run:
-          name: Print the Current Time
-          command: date
+          name: Build the Docker image
+          command: docker build -t "bednar:docker-spring-micro-services"
