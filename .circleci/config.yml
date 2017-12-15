@@ -9,4 +9,4 @@ jobs:
           command: echo Hello, world.
       - run:
           name: Build the Docker image
-          command: docker build -t "bednar:docker-spring-micro-services"
+          command: docker build -t bednar/docker-spring-micro-services:$CIRCLE_BRANCH
