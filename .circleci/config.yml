@@ -9,7 +9,7 @@ jobs:
           command: sudo apt-get update && sudo apt-get install -y groovy
       - run:
           name: Build the Dockerfile
-          command: groovy --version
+          command: groovy build.groovy
       - run:
           name: Build the Docker image
           command: docker build -t bednar/docker-spring-micro-services:$CIRCLE_BRANCH .
