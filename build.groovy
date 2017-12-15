@@ -11,7 +11,7 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 ['maven', 'java'].each {
 
 	def path = './recipes/' + it +'.json'
-	def recipe = jsonSlurper.parse(new File(path), 'UTF-8')
+	def recipe = jsonSlurper.parseText(new File(path).text)
 
 	// # Recipe name
 	recipesText += sprintf('# %1$s [%2$s]\n', recipe.name, recipe.version)
