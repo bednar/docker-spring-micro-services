@@ -1,4 +1,6 @@
 # docker-spring-micro-services
+[![CircleCI](https://circleci.com/gh/bednar/docker-spring-micro-services.svg?style=shield&circle-token=:circle-ci-badge-token)](https://circleci.com/gh/bednar/docker-spring-micro-services) 
+
 The Docker image for developing micro services based on Spring Stream.
 
 ## Customise docker image
