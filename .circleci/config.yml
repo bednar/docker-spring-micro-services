@@ -13,6 +13,25 @@ jobs:
       - run:
           name: Build the Docker image
           command: docker build -t bednar/docker-spring-micro-services:$CIRCLE_BRANCH .
-      - run:
+      - deploy:
           name: Trigger automated build at https://hub.docker.com
-          command: chmod +x ./scripts/release.sh && ./scripts/release.sh
+          command: |
+            if [[ "${CIRCLE_BRANCH}" =~ ^[0-9.]+$ ]]
+            then
+              echo The Dockerfile, for branch \'${CIRCLE_BRANCH}\', will be push to the repository.
+              git config --global user.name "CircleCI"
+              git config --global user.email "sezeyetev@hitbts.comm"
+              git remote show origin
+              git status
+              echo add Dockerfile
+              git add Dockerfile -f
+              git status
+              echo commit
+              git commit -m '[ci skip]'
+              git status
+              echo push
+              git push --set-upstream origin ${CIRCLE_BRANCH}
+              git status
+            else
+              echo The branch name \'${CIRCLE_BRANCH}\' does not match regexp \'\^[0-9.]+\$\' =\> Dockerfile is not push to the repository.
+            fi
