@@ -34,7 +34,7 @@ jobs:
               git commit -m '[ci skip]'
               git push --set-upstream origin ${CIRCLE_BRANCH}
 
-              curl -H "Content-Type: application/json" --data '{"source_type": "Branch", "source_name": "${CIRCLE_BRANCH}"}' -X POST https://registry.hub.docker.com/u/bednar/docker-spring-micro-services/trigger/${DOCKER_HUB_TOKEN}/
+              curl -H "Content-Type: application/json" --data "{\"source_type\": \"Branch\", \"source_name\": \"${CIRCLE_BRANCH}\"}" -X POST https://registry.hub.docker.com/u/bednar/docker-spring-micro-services/trigger/${DOCKER_HUB_TOKEN}/
             else
               echo The branch name \'${CIRCLE_BRANCH}\' does not match regexp \'\^[0-9.]+\$\' =\> Dockerfile is not push to the repository.
             fi
