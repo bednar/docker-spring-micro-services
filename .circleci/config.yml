@@ -20,7 +20,7 @@ jobs:
       - store_artifacts:
           path: ./Dockerfile
 
-      - deploy:
+      - run:
           name: Trigger automated build at https://hub.docker.com
           command: |
             if [[ "${CIRCLE_BRANCH}" =~ ^[0-9.]+$ ]]
