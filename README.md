@@ -8,6 +8,8 @@
 
 The Docker image for developing micro services based on Spring Stream.
 
+![Infrastructure](./Infrastructure.png)
+
 **Using the image, you accept the [Oracle Binary Code License Agreement](http://www.oracle.com/technetwork/java/javase/terms/license/index.html) for Java SE.**
 
 ## Customise docker image
