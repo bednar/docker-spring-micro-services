@@ -4,7 +4,7 @@
   "description" : "Thx https://github.com/kaiwinter/docker-java8-maven/blob/master/Dockerfile",
   "cmd": [
     "# download",
-    "RUN wget -O /tmp/apache-maven-3.5.2.tar.gz http://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz",
+    "RUN wget -nv -O /tmp/apache-maven-3.5.2.tar.gz http://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz",
     "# verify checksum",
     "RUN echo \"948110de4aab290033c23bf4894f7d9a /tmp/apache-maven-3.5.2.tar.gz\" | md5sum -c",
     "# install maven",

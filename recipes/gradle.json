@@ -4,7 +4,7 @@
   "description" : "",
   "cmd": [
     "# download",
-    "RUN wget -O /tmp/gradle-4.4.1-bin.zip https://services.gradle.org/distributions/gradle-4.4.1-bin.zip",
+    "RUN wget -nv -O /tmp/gradle-4.4.1-bin.zip https://services.gradle.org/distributions/gradle-4.4.1-bin.zip",
     "# verify checksum",
     "RUN echo \"e7cf7d1853dfc30c1c44f571d3919eeeedef002823b66b6a988d27e919686389 /tmp/gradle-4.4.1-bin.zip\" | sha256sum -c",
     "# install gradle",
