@@ -8,7 +8,7 @@ def recipesText = ""
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
-['maven', 'java'].each {
+['java', 'maven', 'gradle'].each {
 
 	def path = './recipes/' + it +'.json'
 	def recipe = jsonSlurper.parseText(new File(path).text)
