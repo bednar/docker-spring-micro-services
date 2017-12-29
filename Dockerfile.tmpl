@@ -8,8 +8,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # update dpkg repositories
 RUN apt-get update --fix-missing
 
-# install wget
-RUN apt-get install -y wget
+# install wget, unzip
+RUN apt-get install -y wget unzip
 
 # Recipes
 
