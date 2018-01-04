@@ -8,7 +8,7 @@ def recipesText = ""
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
-['java', 'maven', 'gradle'].each {
+['java', 'maven', 'gradle', 'elk'].each {
 
 	def path = './recipes/' + it +'.json'
 	def recipe = jsonSlurper.parseText(new File(path).text)
@@ -16,12 +16,15 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 	// # Recipe name
 	recipesText += sprintf('# %1$s [%2$s]\n', recipe.name, recipe.version)
 
-	// commands
+	if (recipe.compose)
+	{
+		recipe.cmd = []
+	}
 
+	// commands
 	recipe.cmd.each {
 		recipesText += sprintf('%1$s\n', it)
 	}
-
 
 	recipesText += '\n'
 }
