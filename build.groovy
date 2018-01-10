@@ -4,11 +4,11 @@ println 'Building Dockerfile... '
 
 def templateText = new File('./Dockerfile.tmpl').text
 def recipesText = ""
-
+def logFiles = []
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
-['java', 'maven', 'gradle', 'elk'].each {
+['java', 'maven', 'gradle', 'elasticsearch'].each {
 
 	def path = './recipes/' + it +'.json'
 	def recipe = jsonSlurper.parseText(new File(path).text)
@@ -16,9 +16,9 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 	// # Recipe name
 	recipesText += sprintf('# %1$s [%2$s]\n', recipe.name, recipe.version)
 
-	if (recipe.compose)
+	if (recipe.logFile)
 	{
-		recipe.cmd = []
+		logFiles << recipe.logFile
 	}
 
 	// commands
@@ -29,10 +29,9 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 	recipesText += '\n'
 }
 
-
 templateText = new SimpleTemplateEngine()
 		.createTemplate(templateText)
-		.make(["recipes": recipesText])
+		.make(["recipes": recipesText, "logFiles": logFiles.join(' ')])
 
 def output = new File('./Dockerfile')
 output.text = templateText

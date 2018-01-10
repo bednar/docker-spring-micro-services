@@ -8,8 +8,13 @@ ENV DEBIAN_FRONTEND noninteractive
 # update dpkg repositories
 RUN apt-get update --fix-missing
 
-# install wget, unzip
-RUN apt-get install -y wget unzip
+# install wget, unzip, sudo
+RUN apt-get install -y wget unzip sudo supervisor apt-transport-https
+
+# add Elastic.co repository
+RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+RUN echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-5.x.list
+RUN apt-get update
 
 # Recipes
 
@@ -18,4 +23,7 @@ ${recipes}
 # remove download archive files
 RUN apt-get clean
 
-EXPOSE 6379
+# Enable supervisor
+RUN sudo mkdir -p "/etc/supervisor/conf.d/"
+ADD recipes/supervisor/* /etc/supervisor/conf.d/
+CMD ["/usr/bin/supervisord"]
