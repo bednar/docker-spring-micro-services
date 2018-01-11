@@ -5,10 +5,10 @@
   "cmd": [
     "# install from repository",
     "RUN apt-get install -y elasticsearch",
-    "# start by SysV init",
+    "# add ty system services",
     "RUN sudo update-rc.d elasticsearch defaults 95 10"
   ],
   "service" : "elasticsearch",
   "exposePorts": ["9200", "9300"],
-  "logFile" : "/var/log/elasticsearch/elasticsearch.log"
+  "logFiles" : ["/var/log/elasticsearch/elasticsearch.log"]
 }

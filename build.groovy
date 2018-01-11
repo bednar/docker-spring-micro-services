@@ -10,7 +10,7 @@ def services = []
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
-['java', 'maven', 'gradle', 'elasticsearch'].each {
+['java', 'maven', 'gradle', 'elasticsearch', 'kibana'].each {
 
 	def path = './recipes/' + it +'.json'
 	def recipe = jsonSlurper.parseText(new File(path).text)
@@ -25,9 +25,9 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 	}
 
 	// Log files
-	if (recipe.logFile)
+	if (recipe.logFiles)
 	{
-		logFiles << recipe.logFile
+		logFiles = logFiles.plus(recipe.logFiles)
 	}
 
 	// Service

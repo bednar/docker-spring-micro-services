@@ -27,5 +27,5 @@ groovy build.groovy
 docker build -t "bednar:docker-spring-micro-services" .
 
 ## Run builded image in background
-docker run -d -t bednar:docker-spring-micro-services
+docker run -d -p 5601:5601 -t bednar:docker-spring-micro-services
 ```
