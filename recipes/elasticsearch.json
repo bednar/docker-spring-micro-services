@@ -8,5 +8,7 @@
     "# start by SysV init",
     "RUN sudo update-rc.d elasticsearch defaults 95 10"
   ],
+  "service" : "elasticsearch",
+  "exposePorts": ["9200", "9300"],
   "logFile" : "/var/log/elasticsearch/elasticsearch.log"
 }
