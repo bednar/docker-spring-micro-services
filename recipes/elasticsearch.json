@@ -1,11 +1,11 @@
 {
   "name": "Elasticsearch",
-  "version": "5.6",
+  "version": "5.6.5",
   "description" : "Thx https://www.elastic.co/guide/en/elasticsearch/reference/5.6/deb.html",
   "cmd": [
     "# install from repository",
-    "RUN apt-get install -y elasticsearch",
-    "# add ty system services",
+    "RUN apt-get install -y elasticsearch=5.6.5",
+    "# add system services",
     "RUN sudo update-rc.d elasticsearch defaults 95 10"
   ],
   "service" : "elasticsearch",

@@ -1,0 +1,17 @@
+{
+  "name": "Logstash",
+  "version": "5.6.5",
+  "description" : "Thx https://www.elastic.co/guide/en/logstash/5.6/installing-logstash.html",
+  "cmd": [
+    "# install from repository",
+    "RUN apt-get install -y logstash",
+    "# generate SysV script",
+    "RUN /usr/share/logstash/bin/system-install /etc/logstash/startup.options sysv",
+    "# add ty system services",
+    "RUN sudo update-rc.d logstash defaults 95 10"
+  ],
+  "exposePorts": ["5044"],
+  "logFiles" : [
+    "/var/log/logstash/logstash-plain.log"
+  ]
+}

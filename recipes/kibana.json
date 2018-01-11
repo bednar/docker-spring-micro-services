@@ -1,11 +1,11 @@
 {
   "name": "Kibana",
-  "version": "5.6",
+  "version": "5.6.5",
   "description" : "Thx https://www.elastic.co/guide/en/kibana/5.6/deb.html",
   "cmd": [
     "# install from repository",
-    "RUN apt-get install -y kibana",
-    "# add ty system services",
+    "RUN apt-get install -y kibana=5.6.5",
+    "# add system services",
     "RUN sudo update-rc.d kibana defaults 95 10",
     "ADD ./recipes/config/kibana.yml /etc/kibana/kibana.yml"
   ],
