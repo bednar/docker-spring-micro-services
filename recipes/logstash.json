@@ -7,9 +7,12 @@
     "RUN apt-get install -y logstash",
     "# generate SysV script",
     "RUN /usr/share/logstash/bin/system-install /etc/logstash/startup.options sysv",
+    "ADD ./recipes/config/logstash-pipeline.conf /etc/logstash/conf.d/pipeline.conf",
+    "RUN chown -R logstash:logstash /etc/logstash/conf.d/",
     "# add ty system services",
     "RUN sudo update-rc.d logstash defaults 95 10"
   ],
+  "service" : "logstash",
   "exposePorts": ["5044"],
   "logFiles" : [
     "/var/log/logstash/logstash-plain.log"
