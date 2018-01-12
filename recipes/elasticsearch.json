@@ -5,6 +5,8 @@
   "cmd": [
     "# install from repository",
     "RUN apt-get install -y elasticsearch=5.6.5",
+    "ADD ./recipes/config/elasticsearch-jvm.options /etc/elasticsearch/jvm.options",
+    "RUN chown -R elasticsearch:elasticsearch /etc/elasticsearch/",
     "# add system services",
     "RUN sudo update-rc.d elasticsearch defaults 95 10"
   ],
