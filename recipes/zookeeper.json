@@ -1,0 +1,23 @@
+{
+  "name": "Apache ZooKeeper",
+  "version": "3.3.6",
+  "description" : "Thx https://github.com/31z4/zookeeper-docker",
+  "cmd": [
+
+    "# add user and make dirs",
+    "RUN useradd zookeeper",
+    "RUN mkdir -p /tmp/zookeeper /var/log/zookeeper/",
+    "RUN chown zookeeper:zookeeper /tmp/zookeeper /var/log/zookeeper/",
+
+    "# install ZooKeeper",
+    "RUN wget -nv -O /tmp/zookeeper-3.3.6.tar.gz https://www.apache.org/dist/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz",
+    "RUN echo \"68157fc9bc80a3bc78bb440191e3b32e /tmp/zookeeper-3.3.6.tar.gz\" | md5sum -c",
+    "RUN tar -xzf /tmp/zookeeper-3.3.6.tar.gz -C /opt/",
+    "RUN ln -s /opt/zookeeper-3.3.6 /opt/zookeeper",
+    "RUN mv /opt/zookeeper-3.3.6/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg"
+  ],
+  "exposePorts": ["2181", "2888", "3888"],
+  "logFiles" : [
+    "/var/log/zookeeper/zookeeper.out"
+  ]
+}
