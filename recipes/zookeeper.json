@@ -1,7 +1,7 @@
 {
   "name": "Apache ZooKeeper",
   "version": "3.3.6",
-  "description" : "Thx https://github.com/31z4/zookeeper-docker",
+  "description" : "Thx https://github.com/31z4/zookeeper-docker, https://gist.github.com/bejean/b9ff72c6d2143e16e35d",
   "cmd": [
 
     "# add user and make dirs",
