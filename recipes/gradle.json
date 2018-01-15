@@ -9,7 +9,7 @@
     "RUN echo \"e7cf7d1853dfc30c1c44f571d3919eeeedef002823b66b6a988d27e919686389 /tmp/gradle-4.4.1-bin.zip\" | sha256sum -c",
     "# install gradle",
     "RUN unzip /tmp/gradle-4.4.1-bin.zip -d /opt/",
-    "RUN ln -s /opt/gradle-4.4.1-bin.zip /opt/gradle",
+    "RUN ln -s /opt/gradle-4.4.1 /opt/gradle",
     "RUN ln -s /opt/gradle/bin/gradle /usr/local/bin",
     "RUN rm -f /tmp/gradle-4.4.1-bin.zip",
     "ENV GRADLE_HOME /opt/gradle"
