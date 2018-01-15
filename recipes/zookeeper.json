@@ -14,10 +14,14 @@
     "RUN echo \"68157fc9bc80a3bc78bb440191e3b32e /tmp/zookeeper-3.3.6.tar.gz\" | md5sum -c",
     "RUN tar -xzf /tmp/zookeeper-3.3.6.tar.gz -C /opt/",
     "RUN ln -s /opt/zookeeper-3.3.6 /opt/zookeeper",
-    "RUN mv /opt/zookeeper-3.3.6/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg"
+    "RUN mv /opt/zookeeper-3.3.6/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg",
+    "ADD ./recipes/config/zookeeper-init /etc/init.d/zookeeper",
+    "RUN chmod +x /etc/init.d/zookeeper",
+    "RUN sudo update-rc.d zookeeper defaults 95 10"
   ],
+  "service" : "zookeeper",
   "exposePorts": ["2181", "2888", "3888"],
-  "logFiles" : [
+  "logFiles-disable" : [
     "/var/log/zookeeper/zookeeper.out"
   ]
 }
