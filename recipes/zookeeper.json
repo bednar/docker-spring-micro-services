@@ -1,6 +1,6 @@
 {
   "name": "Apache ZooKeeper",
-  "version": "3.3.6",
+  "version": "3.4.6",
   "description" : "Thx https://github.com/31z4/zookeeper-docker, https://gist.github.com/bejean/b9ff72c6d2143e16e35d",
   "cmd": [
 
@@ -10,11 +10,11 @@
     "RUN chown zookeeper:zookeeper /tmp/zookeeper /var/log/zookeeper/",
 
     "# install ZooKeeper",
-    "RUN wget -nv -O /tmp/zookeeper-3.3.6.tar.gz https://www.apache.org/dist/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz",
-    "RUN echo \"68157fc9bc80a3bc78bb440191e3b32e /tmp/zookeeper-3.3.6.tar.gz\" | md5sum -c",
-    "RUN tar -xzf /tmp/zookeeper-3.3.6.tar.gz -C /opt/",
-    "RUN ln -s /opt/zookeeper-3.3.6 /opt/zookeeper",
-    "RUN mv /opt/zookeeper-3.3.6/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg",
+    "RUN wget -nv -O /tmp/zookeeper-3.4.6.tar.gz https://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz",
+    "RUN echo \"971c379ba65714fd25dc5fe8f14e9ad1 /tmp/zookeeper-3.4.6.tar.gz\" | md5sum -c",
+    "RUN tar -xzf /tmp/zookeeper-3.4.6.tar.gz -C /opt/",
+    "RUN ln -s /opt/zookeeper-3.4.6 /opt/zookeeper",
+    "RUN mv /opt/zookeeper-3.4.6/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg",
     "ADD ./recipes/config/zookeeper-init /etc/init.d/zookeeper",
     "RUN chmod +x /etc/init.d/zookeeper",
     "RUN sudo update-rc.d zookeeper defaults 95 10"
