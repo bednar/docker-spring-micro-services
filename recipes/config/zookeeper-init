@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Purpose: This script starts and stops the Zookeeper daemon
 #

@@ -10,7 +10,7 @@ def services = []
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
-['java', 'maven', 'gradle', 'elasticsearch', 'kibana', 'logstash', 'zookeeper'].each {
+['java', 'maven', 'gradle', 'elasticsearch', 'kibana', 'logstash', 'zookeeper', 'kafka'].each {
 
 	def path = './recipes/' + it +'.json'
 	def recipe = jsonSlurper.parseText(new File(path).text)

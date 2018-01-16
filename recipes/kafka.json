@@ -1,0 +1,26 @@
+{
+  "name": "Apache Kafka",
+  "version": "0.11.0.0",
+  "description" : "Thx https://github.com/31z4/zookeeper-docker, https://gist.github.com/bejean/b9ff72c6d2143e16e35d",
+  "cmd": [
+
+    "# add user and make dirs",
+    "RUN useradd kafka",
+    "RUN mkdir -p /tmp/kafka /var/log/kafka/ /var/run/kafka/",
+    "RUN chown kafka:kafka /tmp/kafka /var/log/kafka/ /var/run/kafka/",
+
+    "# install Kafka",
+    "RUN wget -nv -O /tmp/kafka-0.11.0.0.tgz https://archive.apache.org/dist/kafka/0.11.0.0/kafka_2.12-0.11.0.0.tgz",
+    "RUN echo \"a408f2eea282bcfa8a25ba20eb1ad49b /tmp/kafka-0.11.0.0.tgz\" | md5sum -c",
+    "RUN tar -xzf /tmp/kafka-0.11.0.0.tgz -C /opt/",
+    "RUN ln -s /opt/kafka_2.12-0.11.0.0 /opt/kafka",
+    "ADD ./recipes/config/kafka-init /etc/init.d/kafka",
+    "RUN chown -R kafka:kafka /opt/kafka/",
+    "RUN chmod +x /etc/init.d/kafka",
+    "RUN sudo update-rc.d kafka defaults 95 10"
+  ],
+  "service" : "kafka",
+  "logFiles" : [
+    "/var/log/kafka/console.log"
+  ]
+}
