@@ -16,7 +16,7 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 	def recipe = jsonSlurper.parseText(new File(path).text)
 
 	// # Recipe name
-	recipesText += sprintf('# %1$s [%2$s]\n', recipe.name, recipe.version)
+	recipesText += "# $recipe.name [$recipe.version]\n"
 
 	// Expose ports
 	if (recipe.exposePorts)
@@ -38,16 +38,28 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 
 	// commands
 	recipe.cmd.each {
-		recipesText += sprintf('%1$s\n', it)
+		recipesText += "$it\n"
 	}
 
 	recipesText += '\n'
 }
 
+def multiTailColors = ["green", "yellow", "blue", "magenta", "cyan", "white", "red"] as LinkedList
+def multiTailArgs = logFiles.collect
+{
+	// get first and remove
+	def color = multiTailColors.poll();
+	// add to end
+	multiTailColors.add(color)
+
+	"-ci $color -I $it"
+}.join(' ')
+
 templateText = new SimpleTemplateEngine()
 		.createTemplate(templateText)
 		.make(["recipes": recipesText,
 			   "logFiles": logFiles.join(' '),
+			   "multiTailArgs": multiTailArgs,
 			   "exposePorts": exposePorts.join(' '),
 			   "services": services.join(' ')])
 
