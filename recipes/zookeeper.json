@@ -21,7 +21,7 @@
   ],
   "service" : "zookeeper",
   "exposePorts": ["2181", "2888", "3888"],
-  "logFiles-disable" : [
+  "logFiles" : [
     "/var/log/zookeeper/zookeeper.out"
   ]
 }

@@ -30,4 +30,4 @@ EXPOSE ${exposePorts}
 RUN for p in ${logFiles}; do mkdir -p `dirname \$p`; touch \$p; chmod a+w \$p; done
 
 # Start services & show logs
-CMD ["sh", "-c", "for s in ${services}; do service \$s start; done && multitail ${multiTailArgs}"]
+CMD ["sh", "-c", "for s in ${services}; do service \$s start; done && multitail -M 0 --follow-all ${multiTailArgs}"]
