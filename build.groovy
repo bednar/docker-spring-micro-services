@@ -7,6 +7,7 @@ def recipesText = ""
 def logFiles = []
 def exposePorts = []
 def services = []
+def provisioningScripts = ['echo test', '/usr/share/elasticsearch/bin/elasticsearch-provisioning']
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
@@ -61,6 +62,7 @@ templateText = new SimpleTemplateEngine()
 			   "logFiles": logFiles.join(' '),
 			   "multiTailArgs": multiTailArgs,
 			   "exposePorts": exposePorts.join(' '),
+			   "provisioningScripts" : provisioningScripts.join('; '),
 			   "services": services.join(' ')])
 
 def output = new File('./Dockerfile')

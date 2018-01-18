@@ -6,6 +6,8 @@
     "# install from repository",
     "RUN apt-get install -y elasticsearch=5.6.5",
     "ADD ./recipes/config/elasticsearch-jvm.options /etc/elasticsearch/jvm.options",
+    "ADD ./recipes/config/elasticsearch-provisioning /usr/share/elasticsearch/bin/elasticsearch-provisioning",
+    "RUN chmod +x /usr/share/elasticsearch/bin/elasticsearch-provisioning",
     "ADD ./recipes/config/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml",
     "RUN chown -R elasticsearch:elasticsearch /etc/elasticsearch/",
     "# add system services",
