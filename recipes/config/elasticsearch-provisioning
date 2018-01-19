@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9200)" == "000" ]]; do
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 0.0.0.0:9200)" == "000" ]]; do
     printf '...'
     sleep 5
 done

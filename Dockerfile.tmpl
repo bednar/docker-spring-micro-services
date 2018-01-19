@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update --fix-missing
 
 # install wget, unzip, sudo, curl, ...
-RUN apt-get install -y wget unzip sudo apt-transport-https multitail curl joe
+RUN apt-get install -y wget unzip sudo apt-transport-https multitail curl joe jq
 
 # add Elastic.co repository
 RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -

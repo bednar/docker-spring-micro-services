@@ -22,20 +22,24 @@ The Docker image for developing micro services based on Spring Stream.
 ### Kibana
  - [http://localhost:5601/](http://localhost:5601/)
 
-## Customise docker image
+## Docker
+
+### Build a Dockerfile and an Image
 ```bash
-# Install groovy
+# Install the Groovy
 brew install groovy
 
-# Customise versions
+# Customise recipes versions
 open versions.json
 
-# Create docker file
+# Create the Dockerfile
 groovy build.groovy
 
-## Build docker image (feel free to change image name - bednar:docker-spring-micro-services)
+## Build the docker image
 docker build -t "bednar:docker-spring-micro-services" .
-
-## Run builded image in background
+```
+## Run an Image
+```bash
+## Run the builded image in background
 docker run -d -p 5601:5601 -p 9200:9200 -t bednar:docker-spring-micro-services
 ```

@@ -7,10 +7,13 @@
     "RUN apt-get install -y kibana=5.6.5",
     "# add system services",
     "RUN sudo update-rc.d kibana defaults 95 10",
-    "ADD ./recipes/config/kibana.yml /etc/kibana/kibana.yml"
+    "ADD ./recipes/config/kibana.yml /etc/kibana/kibana.yml",
+    "ADD ./recipes/config/kibana-provisioning /usr/share/kibana/bin/kibana-provisioning",
+    "RUN chmod +x /usr/share/kibana/bin/kibana-provisioning"
   ],
   "service" : "kibana",
   "exposePorts": ["5601"],
+  "provisioningScripts": ["/usr/share/kibana/bin/kibana-provisioning"],
   "logFiles" : [
     "/var/log/kibana/kibana.stdout",
     "/var/log/kibana/kibana.stderr"

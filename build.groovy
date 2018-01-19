@@ -1,13 +1,17 @@
 import groovy.text.SimpleTemplateEngine
 
-println 'Building Dockerfile... '
+class StartupOptions { List<StartupOptionsRecipe> recipes = []}
+class StartupOptionsRecipe { String name; String version; String service; List<String> logFiles = []; List<String> provisioningScripts = [] }
 
+println '[1/3] Processing Recipes... '
+
+def startupOptions = new StartupOptions()
 def templateText = new File('./Dockerfile.tmpl').text
 def recipesText = ""
 def logFiles = []
 def exposePorts = []
 def services = []
-def provisioningScripts = ['echo test', '/usr/share/elasticsearch/bin/elasticsearch-provisioning']
+def provisioningScripts = ['echo Start provisioning']
 
 // parse recipes
 def jsonSlurper = new  groovy.json.JsonSlurper()
@@ -15,9 +19,13 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 
 	def path = './recipes/' + it +'.json'
 	def recipe = jsonSlurper.parseText(new File(path).text)
+	def recipeInfo = "$recipe.name [$recipe.version]"
+	def startupOptionsRecipe = new StartupOptionsRecipe(name: "$recipe.name", version: "$recipe.version")
+
+	print " * $recipeInfo... "
 
 	// # Recipe name
-	recipesText += "# $recipe.name [$recipe.version]\n"
+	recipesText += "# $recipeInfo\n"
 
 	// Expose ports
 	if (recipe.exposePorts)
@@ -25,16 +33,24 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 		exposePorts = exposePorts.plus(recipe.exposePorts)
 	}
 
+	if (recipe.provisioningScripts)
+	{
+		provisioningScripts = provisioningScripts.plus(recipe.provisioningScripts)
+		startupOptionsRecipe.provisioningScripts.addAll(recipe.provisioningScripts)
+	}
+
 	// Log files
 	if (recipe.logFiles)
 	{
 		logFiles = logFiles.plus(recipe.logFiles)
+		startupOptionsRecipe.logFiles.addAll(recipe.logFiles)
 	}
 
 	// Service
 	if (recipe.service)
 	{
 		services << recipe.service
+		startupOptionsRecipe.service = recipe.service
 	}
 
 	// commands
@@ -43,7 +59,13 @@ def jsonSlurper = new  groovy.json.JsonSlurper()
 	}
 
 	recipesText += '\n'
+
+	startupOptions.recipes.add(startupOptionsRecipe)
+
+	print "done\n"
 }
+
+println()
 
 def multiTailColors = ["green", "yellow", "blue", "magenta", "cyan", "white", "red"] as LinkedList
 def multiTailArgs = logFiles.collect
@@ -65,7 +87,17 @@ templateText = new SimpleTemplateEngine()
 			   "provisioningScripts" : provisioningScripts.join('; '),
 			   "services": services.join(' ')])
 
-def output = new File('./Dockerfile')
-output.text = templateText
+print '[2/3] Generating the Dockerfile... '
 
-println 'Success'
+def dockerfile = new File('./Dockerfile')
+dockerfile.text = templateText
+
+println()
+
+
+println '[3/3] Generating the startup.options... '
+
+def startupOptionsFile = new File('./startup.options')
+startupOptionsFile.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(startupOptions))
+
+println('\nAll successfully finished :-)')

@@ -15,5 +15,6 @@
   ],
   "service" : "elasticsearch",
   "exposePorts": ["9200", "9300"],
+  "provisioningScripts": ["/usr/share/elasticsearch/bin/elasticsearch-provisioning"],
   "logFiles" : ["/var/log/elasticsearch/elasticsearch.log"]
 }
