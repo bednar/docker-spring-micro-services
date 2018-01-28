@@ -27,8 +27,6 @@ RUN apt-get clean
 EXPOSE ${exposePorts}
 
 # Create Log files
-# RUN for p in ${logFiles}; do mkdir -p `dirname \$p`; touch \$p; chmod a+w \$p; done
-
 ADD startup.sh /opt/startup.sh
 ADD startup.options /opt/startup.options
 RUN /opt/startup.sh
