@@ -1,0 +1,16 @@
+{
+  "name": "Couchbase Stack",
+  "version": "4.6.4",
+  "description" : "Thx https://github.com/couchbase/docker/blob/master/enterprise/couchbase-server/4.6.4/Dockerfile https://blog.jsinh.in/setup-couchbase-server-and-sync-gateway-on-ubuntu-2/",
+  "cmd": [
+    "ENV package_name couchbase-server-enterprise_4.6.4-ubuntu14.04_amd64.deb",
+
+    "# download server",
+    "RUN wget -nv -O /tmp/$package_name http://packages.couchbase.com/releases/4.6.4/$package_name",
+    "# install server",
+    "RUN dpkg -i /tmp/$package_name"
+  ],
+  "service" : "couchbase-server",
+  "exposePorts": ["8091", "8092", "8093", "8094", "11207", "11210", "11211", "18091", "18092", "18093", "18094"],
+  "logFiles" : ["/opt/couchbase/var/lib/couchbase/logs/info.log", "/opt/couchbase/var/lib/couchbase/logs/error.log"]
+}

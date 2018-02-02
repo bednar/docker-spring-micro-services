@@ -29,7 +29,7 @@ EXPOSE ${exposePorts}
 # Create Log files
 ADD startup.sh /opt/startup.sh
 ADD startup.options /opt/startup.options
-RUN /opt/startup.sh
+RUN /opt/startup.sh  --createLogFiles
 
 # Start services & show logs
-CMD ["sh", "-c", "for s in ${services}; do service \$s start; done; ${provisioningScripts}; multitail -M 0 --follow-all ${multiTailArgs}"]
+CMD ["sh", "-c", "/opt/startup.sh --startServices --provisioning --multitail"]
