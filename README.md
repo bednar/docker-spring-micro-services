@@ -22,6 +22,16 @@ The Docker image for developing micro services based on Spring Stream.
 ### Kibana
  - [http://localhost:5601/](http://localhost:5601/)
 
+## Couchbase Stack
+### Couchbase Server
+
+The Admin username is **Administrator** and the password is **changeme**.
+
+- Couchbase Web console, REST/HTTP interface - [http://localhost:8091](http://localhost:8091)
+- Views, queries, XDCR - [http://localhost:8092](http://localhost:8092)
+- Query services - [http://localhost:8093](http://localhost:8093)
+- Full-text Search - [http://localhost:8094](http://localhost:8094)
+
 ## Docker
 
 ### Build a Dockerfile and an Image
@@ -41,5 +51,5 @@ docker build -t "bednar:docker-spring-micro-services" .
 ## Run an Image
 ```bash
 ## Run the builded image in background
-docker run -d -p 5601:5601 -p 9200:9200 -t bednar:docker-spring-micro-services
+docker run -d -p 5601:5601 -p 9200:9200 -p 8091-8094:8091-8094 -t bednar:docker-spring-micro-services
 ```

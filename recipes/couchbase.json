@@ -8,9 +8,14 @@
     "# download server",
     "RUN wget -nv -O /tmp/$package_name http://packages.couchbase.com/releases/4.6.4/$package_name",
     "# install server",
-    "RUN dpkg -i /tmp/$package_name"
+    "RUN dpkg -i /tmp/$package_name",
+
+    "# provisioning",
+    "ADD ./recipes/config/couchbase-provisioning /opt/couchbase/bin/couchbase-provisioning",
+    "RUN chmod +x /opt/couchbase/bin/couchbase-provisioning"
   ],
   "service" : "couchbase-server",
   "exposePorts": ["8091", "8092", "8093", "8094", "11207", "11210", "11211", "18091", "18092", "18093", "18094"],
+  "provisioningScripts": ["/opt/couchbase/bin/couchbase-provisioning"],
   "logFiles" : ["/opt/couchbase/var/lib/couchbase/logs/info.log", "/opt/couchbase/var/lib/couchbase/logs/error.log"]
 }

@@ -5,6 +5,7 @@
 #
 #
 
+echo "Waiting for the Kibana start..."
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' 0.0.0.0:5601)" == "000" ]]; do
     printf '...'
     sleep 5
@@ -12,6 +13,8 @@ done
 
 # Wait for finish indexing by ElasticSearch
 sleep 15
+
+echo "done"
 
 KIBANA_URL="http://0.0.0.0:5601"
 INDEX_PATTERN="micro-*"

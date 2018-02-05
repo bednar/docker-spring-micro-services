@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Memory quota
+curl -v -X POST http://0.0.0.0:8091/pools/default -d memoryQuota=300 -d indexMemoryQuota=300
+
+# Index services
+curl -v http://0.0.0.0:8091/node/controller/setupServices -d services=kv%2Cn1ql%2Cindex
+
+# Admin password
+curl -v http://0.0.0.0:8091/settings/web -d port=8091 -d username=Administrator -d password=changeme
+
+# Storage config
+curl -i -u Administrator:changeme -X POST http://0.0.0.0:8091/settings/indexes -d 'storageMode=memory_optimized'
+
+# Create Buckets
+curl -X POST http://0.0.0.0:8091/pools/default/buckets -u Administrator:changeme -d name=microservices -d ramQuotaMB=150 -d authType=sasl -d replicaNumber=1
+curl -X POST http://0.0.0.0:8091/pools/default/buckets -u Administrator:changeme -d name=microservices-test -d ramQuotaMB=150 -d authType=sasl -d replicaNumber=1
